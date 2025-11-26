@@ -1,29 +1,167 @@
-Deskripsi
-Repo ini berisi kode Python untuk mengimplementasikan autocropping dan warping pada gambar KTP (Kartu Tanda Penduduk) Indonesia dengan tujuan meningkatkan akurasi OCR (Optical Character Recognition) pada gambar KTP. Autocropping dan warping digunakan untuk mengambil area yang relevan dari gambar KTP dan mengubahnya menjadi format yang lebih sesuai untuk proses OCR.
+Proyek ini merupakan pemrosesan citra KTP (Kartu Tanda Penduduk) menggunakan OpenCV & NumPy yang telah dipisahkan ke dalam beberapa file agar lebih rapi, modular, dan mudah dipelihara, tanpa mengubah logika, variabel, maupun cara kerja aslinya.
 
-Cara Kerja
-1. Membaca gambar KTP yang akan diproses.
-2. Menggunakan pemisahan kanal untuk membagi gambar menjadi kanal biru (blue) dan merah (red).
-3. Melakukan Gaussian Blur pada kedua kanal untuk mengurangi noise.
-4. Melakukan thresholding untuk menghasilkan gambar biner pada kedua kanal.
-5. Menggabungkan hasil thresholding biru dan merah menggunakan operasi bitwise OR.
-6. Menghilangkan area yang sama antara thresholding biru dan merah.
-7. Melakukan operasi erosi untuk membersihkan gambar biner.
-8. Mencari kontur pada gambar erosi.
-9. Mengidentifikasi kontur terbesar yang merupakan area gambar KTP.
-10. Mengambil area gambar KTP dengan memotong gambar asli menggunakan koordinat dari kontur terbesar.
-11. Melakukan rotasi gambar jika diperlukan berdasarkan orientasi.
-12. Mengganti ukuran gambar ke ukuran yang ditentukan (900x600 piksel).
-13. Melakukan Gaussian Blur pada kanal biru berdasarkan nilai mean value B.
-14. Melakukan thresholding pada kanal biru berdasarkan nilai threshold yang dihitung berdasarkan mean value B.
-15. Menghasilkan gambar akhir setelah proses autocropping dan warping.
+Struktur file:
 
-Prasyarat
-- Python 3.x
-- OpenCV (pip install opencv-python)
-- NumPy (pip install numpy)
+📁 project_folder
+│
+├── main.py
+├── preprocess.py
+├── threshold_process.py
+├── coordinate_process.py
+└── KTP.jpg
 
-Cara Menggunakan
-Pastikan Anda telah menginstal prasyarat yang disebutkan di atas.
-Simpan gambar KTP yang ingin Anda proses dalam repositori ini atau ubah path gambar di kode sesuai dengan lokasi gambar Anda.
-Jalankan kode Python untuk melakukan autocropping dan warping dengan menjalankan Autocrop and Warp for Indonesia ID Card.py.
+1. main.py – File Utama (Orchestrator)
+
+File ini adalah pengendali utama. Tugasnya:
+
+Membaca gambar KTP.jpg
+
+Memanggil seluruh fungsi pemrosesan
+
+Menampilkan output final
+
+Alur kerja di main.py
+image = cv2.imread("KTP.jpg")
+
+resized_image, mean_value_b, blue_threshold = preprocess_image(image)
+
+combined_threshold2, threshold_gray = threshold_processing(resized_image, mean_value_b)
+
+final = get_final_image(resized_image, image, combined_threshold2, threshold_gray, blue_threshold)
+
+
+✅ Tidak ada logika dipindahkan atau diubah
+✅ Hanya memanggil fungsi dari file lain
+
+2. preprocess.py – Tahap Preprocessing Awal
+
+Fungsi utama:
+
+preprocess_image(image)
+
+
+Tugas file ini:
+
+Mengambil channel biru (Blue) dan merah (Red)
+
+Melakukan GaussianBlur
+
+Melakukan threshold pada channel
+
+Menggabungkan (subtract) untuk membentuk area KTP
+
+Mencari kontur terbesar
+
+Melakukan:
+
+Crop gambar
+
+Rotasi jika perlu
+
+Resize ke (900 x 600)
+
+Menghitung rata-rata channel biru (mean B)
+
+Output:
+
+return resized_image, mean_value_b, blue_threshold
+
+
+✅ Fokus file: membersihkan & menormalkan citra awal
+
+3. threshold_process.py – Threshold Adaptif Lanjutan
+
+Fungsi utama:
+
+threshold_processing(resized_image, mean_value_b)
+
+
+File ini melakukan:
+
+Penyesuaian blur berdasarkan mean_value_b
+
+Konversi ke grayscale
+
+Penentuan nilai threshold dinamis:
+
+threshold_value
+
+threshold_value_r
+
+Threshold untuk:
+
+Channel B
+
+Channel R
+
+Grayscale
+
+Menggabungkan hasil threshold:
+
+combined_threshold2 = cv2.subtract(crop_threshold_b, crop_threshold_r)
+
+
+Output:
+
+return combined_threshold2, threshold_gray
+
+
+✅ Fokus file: mempertegas area penting menggunakan threshold dinamis
+
+4. coordinate_process.py – Pendeteksian Titik & Transformasi
+
+Fungsi utama:
+
+get_final_image(resized_image, image, combined_threshold2, threshold_gray, blue_threshold)
+
+
+Ini adalah bagian paling kompleks dan penting:
+
+Berisi:
+
+find_nearest_coordinates() → mencari titik terdekat
+
+Mendeteksi titik atas, bawah, kiri, kanan
+
+Menentukan 4 sudut utama KTP
+
+Koreksi posisi
+
+Melakukan Perspective Transform (Warp)
+
+Menghasilkan citra final dengan posisi lurus
+
+Pada akhirnya menghasilkan:
+
+return final
+
+
+✅ Fokus file: mengoreksi perspektif & menyusun hasil akhir
+
+Alur Lengkap Sistem
+
+Berikut alur sederhana sistemnya:
+
+KTP.jpg
+   ↓
+preprocess.py → crop + rotate + resize + mean B
+   ↓
+threshold_process.py → adaptive threshold
+   ↓
+coordinate_process.py → find points + warp
+   ↓
+Result → final image (ditampilkan)
+
+Cara Menjalankan
+
+Pastikan kamu sudah menginstal library berikut:
+
+pip install numpy opencv-python
+
+
+Lalu jalankan:
+
+python main.py
+
+
+Pastikan file KTP.jpg berada di folder yang sama dengan file .py.
