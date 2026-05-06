@@ -1,6 +1,4 @@
 ## Demo
-<img width="1587" height="2245" alt="Input Image" src="https://github.com/user-attachments/assets/46f64100-6179-4779-b6e4-0201c1959b1d" />
-
 
 Full Video: aa
 
