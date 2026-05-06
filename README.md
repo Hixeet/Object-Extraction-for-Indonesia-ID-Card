@@ -87,6 +87,8 @@ numpy
 
 10. **Final Output**
 
+   * Uses `cv2.getPerspectiveTransform`
+   * Warps the object into a normalized rectangular view (900x600)
    * If the object is already aligned → original image is used
    * Otherwise → transformed image is displayed
 
