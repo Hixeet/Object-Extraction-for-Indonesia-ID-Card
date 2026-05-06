@@ -25,7 +25,7 @@ Full Video: aa
 
 ```bash
 git clone https://github.com/Hixeet/Object-Extraction-for-Indonesia-ID-Card.git
-cd your-repo-name
+cd Object-Extraction-for-Indonesia-ID-Card
 ```
 
 2. Install dependencies:
