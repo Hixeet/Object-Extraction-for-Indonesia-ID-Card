@@ -87,8 +87,8 @@ numpy
 
 10. **Final Output**
 
-* If the object is already aligned → original image is used
-* Otherwise → transformed image is displayed
+   * If the object is already aligned → original image is used
+   * Otherwise → transformed image is displayed
 
 ---
 
