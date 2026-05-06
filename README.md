@@ -1,8 +1,5 @@
 ## Demo
-
-<img width="1920" height="1080" alt="Black and White Simple Portfolio Presentation (1)" src="https://github.com/user-attachments/assets/5c6a8364-3c42-4983-b93a-2c626d78b14d" />
-
-
+<img width="1587" height="2245" alt="Input Image" src="https://github.com/user-attachments/assets/46f64100-6179-4779-b6e4-0201c1959b1d" />
 
 
 Full Video: aa
