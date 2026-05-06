@@ -1,6 +1,7 @@
 ## Demo
 
-![Image]![Uploading Black and White Simple Portfolio Presentation.png…]()
+![Uploading Black and White Simple Portfolio Presentation.png…]()
+
 
 Full Video: aa
 
