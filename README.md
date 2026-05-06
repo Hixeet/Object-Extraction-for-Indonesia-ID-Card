@@ -24,7 +24,7 @@ Full Video: aa
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/your-repo-name.git
+git clone https://github.com/Hixeet/Object-Extraction-for-Indonesia-ID-Card.git
 cd your-repo-name
 ```
 
