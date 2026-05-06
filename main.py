@@ -5,7 +5,7 @@ from erosion import apply_erosion
 from coordinate_utils import find_nearest_coordinates
 from perspective import apply_perspective
 
-image = cv2.imread('testing_image_1.png')
+image = cv2.imread('testing_image_1.png') #For other image format like "jpg, jpeg, etc" or image not found in directory, using path from image
 
 b, g, r, blue_threshold, red_threshold, combined_threshold = preprocess_image(image)
 
