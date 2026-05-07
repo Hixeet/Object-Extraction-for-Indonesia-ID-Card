@@ -1,6 +1,9 @@
+This project was developed during an internship to enhance the performance and reliability of an existing OCR system for Indonesian identity cards (KTP) through computer vision based object detection and object extraction techniques. The system utilizes OpenCV and NumPy to automatically detect the KTP region from an input image using color segmentation, thresholding, contour analysis, and morphological operations, followed by object extraction through automatic cropping, orientation correction, corner localization, and perspective transformation. By identifying the largest contour corresponding to the KTP area and estimating its corner coordinates, the system is able to correct skewed or distorted perspectives and transform the captured image into a normalized rectangular format with a fixed resolution, allowing the OCR pipeline to process cleaner and more standardized input data. This preprocessing approach significantly improves OCR accuracy and robustness under varying image conditions by ensuring that the KTP object has been properly isolated from the background, aligned, and perspective-corrected before text recognition is performed.
+
+---
+
 ## Demo
 
-Full Video: aa
 <img width="1280" height="720" alt="WhatsApp Image 2026-05-07 at 7 40 28 PM" src="https://github.com/user-attachments/assets/a252b21e-833e-440b-89fa-5f4befe638f0" />
 
 ---
